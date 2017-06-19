@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-@CommandPermissions(level = Rank.SENIOR_ADMIN, source = SourceType.ONLY_CONSOLE, blockHostConsole = true)
+@CommandPermissions(level = Rank.SENIOR_ADMIN, source = SourceType.BOTH, blockHostConsole = false)
 @CommandParameters(description = "For the terrible admins.", usage = "/<command> <playername>")
 public class Command_mnpn extends FreedomCommand
 {
@@ -38,19 +38,16 @@ public class Command_mnpn extends FreedomCommand
 
         final String ip = player.getAddress().getAddress().getHostAddress().trim();
 
-        // Remove from superadmin
         Admin admin = getAdmin(player);
         if (admin != null)
         {
             FUtil.adminAction(sender.getName(), "Removing " + player.getName() + " from the admin list", true);
             plugin.al.removeAdmin(admin);
         }
-
-        // Remove from whitelist
         player.setWhitelisted(false);
-
-        // Deop
         player.setOp(false);
+        
+        player.chat("What?");
 
         // Ban player
         Ban ban = Ban.forPlayer(player, sender);

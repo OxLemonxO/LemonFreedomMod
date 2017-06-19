@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import me.totalfreedom.totalfreedommod.admin.AdminList;
+import me.totalfreedom.totalfreedommod.banning.Ban;
 import me.totalfreedom.totalfreedommod.banning.BanManager;
 import me.totalfreedom.totalfreedommod.banning.PermbanList;
 import me.totalfreedom.totalfreedommod.blocking.BlockBlocker;
@@ -37,6 +38,11 @@ import me.totalfreedom.totalfreedommod.world.WorldManager;
 import net.pravian.aero.component.service.ServiceManager;
 import net.pravian.aero.plugin.AeroPlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mcstats.Metrics;
@@ -243,6 +249,28 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
 
         FLog.info("Plugin disabled");
     }
+    
+        @EventHandler
+    public void onPlayerUseItem(PlayerInteractEvent event) //well this can be abused; anyone with a diamond axe can banne.
+    {
+        ItemStack item = event.getItem();
+        Player player = event.getPlayer();
+            if(item == null)
+            {
+                return;
+            }
+            
+            if(item.equals(Material.DIAMOND_AXE))
+            {
+            Ban ban = Ban.forPlayer(player, sender);
+            ban.setReason("&cYou were struck by " + sender.getName() + "'s Ban Hammer.");
+            for (String playerIp : plugin.pl.getData(player).getIps())
+            {
+                ban.addIp(playerIp);
+            }
+        plugin.bm.addBan(ban);
+    }
+}
 
     public static class BuildProperties
     {
