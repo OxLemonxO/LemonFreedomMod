@@ -254,7 +254,7 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
     public void onPlayerUseItem(PlayerInteractEvent event) //well this can be abused; anyone with a diamond axe can banne.
     {
         ItemStack item = event.getItem();
-        Player player = event.getPlayer();
+        //Player player = event.getPlayer();
             if(item == null)
             {
                 return;
@@ -262,13 +262,13 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
             
             if(item.equals(Material.DIAMOND_AXE))
             {
-            Ban ban = Ban.forPlayer(player, sender);
-            ban.setReason("&cYou were struck by " + sender.getName() + "'s Ban Hammer.");
-            for (String playerIp : plugin.pl.getData(player).getIps())
-            {
-                ban.addIp(playerIp);
-            }
-        plugin.bm.addBan(ban);
+            //Ban ban = Ban.forPlayer(player, sender);
+            //ban.setReason("&cYou were struck by " + sender.getName() + "'s Ban Hammer.");
+           // for (String playerIp : plugin.pl.getData(player).getIps())
+            //{
+            //    ban.addIp(playerIp);
+     //       }
+        //plugin.bm.addBan(ban);
     }
 }
 
@@ -296,8 +296,8 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
                 author = props.getProperty("program.build.author", "Mnpn");
                 codename = props.getProperty("program.build.codename", "Swift");
                 version = props.getProperty("program.build.version", "5");
-                number = props.getProperty("program.build.number", "1");
-                date = props.getProperty("program.build.date", "18/06/2017");
+                number = props.getProperty("program.build.number", "1.2");
+                date = props.getProperty("program.build.date", "20/06/2017");
                 head = props.getProperty("program.build.head", "Dev");
             }
             catch (Exception ex)
