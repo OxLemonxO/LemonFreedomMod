@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Oh looka  license header.
  */
 package me.totalfreedom.totalfreedommod.command;
 
@@ -16,20 +14,20 @@ import org.bukkit.entity.Player;
 
 /**
  *
- * @author mnpn0
+ * @author mnpn0 Thanks NetBeans I appreciate it.
  */
 @CommandPermissions(level = Rank.OP, source = SourceType.BOTH, blockHostConsole = false)
 @CommandParameters(description = "Slap someone.", usage = "/<command> <playername>")
 
 public class Command_slap extends FreedomCommand
-        
+
 {
-    
+
     public Command_slap()
     {
-       
+
     }
-       
+
     @Override
     public boolean run(final CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
@@ -37,17 +35,16 @@ public class Command_slap extends FreedomCommand
         {
             return false;
         }
-        
+
         String theplayeritselfifnotactuallyfoundkek = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " "); // Can I learn how to code one day?
-        
+
         final Player player = getPlayer(args[0]);
         if (player == null)
         {
             sender.sendMessage(ChatColor.RED + "Player \"" + theplayeritselfifnotactuallyfoundkek + "\" not found!");
             return true;
         }
-        
-        
+
         FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " gave " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " a nice slap in the face!");
         return true;
     }
