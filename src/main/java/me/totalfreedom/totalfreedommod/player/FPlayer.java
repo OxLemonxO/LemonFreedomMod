@@ -1,7 +1,9 @@
 package me.totalfreedom.totalfreedommod.player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import me.totalfreedom.totalfreedommod.TotalFreedomMod;
@@ -18,6 +20,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.Location;
+import org.bukkit.util.BlockIterator;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 
 public class FPlayer
 {
@@ -66,6 +72,17 @@ public class FPlayer
     private boolean cmdspyEnabled = false;
     private String tag = null;
     private int warningCount = 0;
+
+    public void setBanHammer(boolean enabled)
+    {
+        this.banHammer = enabled;
+    }
+
+    public boolean hasBanHammer()
+    {
+        return this.banHammer;
+    }
+    private boolean banHammer = false;
 
     public FPlayer(TotalFreedomMod plugin, Player player)
     {
@@ -135,6 +152,40 @@ public class FPlayer
     public void disableFuckoff()
     {
         this.fuckoffRadius = 0;
+    }
+
+    public final Location getTargetBlock(int range)
+    {
+        BlockIterator iter = new BlockIterator(player, range);
+        Block lastBlock = iter.next();
+        while (iter.hasNext())
+        {
+            lastBlock = iter.next();
+            if (lastBlock.getType() == Material.AIR)
+            {
+                continue;
+            }
+            break;
+        }
+        return lastBlock.getLocation();
+    }
+
+    public LivingEntity getTargetEntity(int blocks)
+    {
+        Set<Material> transparent = new HashSet<Material>();
+        transparent.add(Material.AIR);
+        for (Block block : player.getLineOfSight(transparent, blocks))
+        {
+            Location loc2 = block.getLocation();
+            for (LivingEntity e : player.getWorld().getLivingEntities())
+            {
+                if (e.getLocation().distance(loc2) <= 2 && !e.equals(player))
+                {
+                    return e;
+                }
+            }
+        }
+        return null;
     }
 
     public void resetMsgCount()

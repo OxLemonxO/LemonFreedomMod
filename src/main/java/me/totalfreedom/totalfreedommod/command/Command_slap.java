@@ -30,16 +30,23 @@ public class Command_slap extends FreedomCommand
        
     }
        
-    public boolean run(final CommandSender sender, Player player, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
+    @Override
+    public boolean run(final CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         if (args.length < 1)
         {
             return false; 
         }
         
-        String name = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
+        final Player player = getPlayer(args[0]);
+        if (player == null)
+        {
+            sender.sendMessage(ChatColor.RED + "Player " + player + " not found!");
+            return true;
+        }
         
-        FUtil.bcastMsg(ChatColor.YELLOW + sender.getName() + " gave " + name + " a nice slap in the face!");
+        
+        FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " gave " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " a nice slap in the face!");
         return true;
     }
 }

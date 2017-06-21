@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 @CommandPermissions(level = Rank.SUPER_ADMIN, source = SourceType.BOTH, blockHostConsole = false) //Supers can *attempt* to run it, but to no avail.
-@CommandParameters(description = "Send someone to hell.", usage = "/<command> <playername>")
+@CommandParameters(description = "Send someone to hell.", usage = "/<command> <playername> <reason>")
  public class Command_hell extends FreedomCommand
  {
    public Command_hell()

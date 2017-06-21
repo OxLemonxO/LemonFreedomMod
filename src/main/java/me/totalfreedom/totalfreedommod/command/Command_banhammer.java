@@ -1,52 +1,36 @@
 package me.totalfreedom.totalfreedommod.command;
 
-import java.util.Arrays;
+import me.totalfreedom.totalfreedommod.rank.Rank;
 import me.totalfreedom.totalfreedommod.util.FUtil;
+import me.totalfreedom.totalfreedommod.player.FPlayer;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandPermissions(level = me.totalfreedom.totalfreedommod.rank.Rank.SYSTEM_ADMIN, source = SourceType.BOTH, blockHostConsole = false) //There is a caution for it anyways, that is more friendly.
-@CommandParameters(description = "Unleash the BanHammer...", usage = "/<command> <false>")
+@CommandPermissions(level = Rank.SYSTEM_ADMIN, source = SourceType.ONLY_IN_GAME)
+@CommandParameters(description = "Unleash the power of the BanHammer..", usage = "/<command>")
 
 public class Command_banhammer extends FreedomCommand
 {
-    public Command_banhammer()
-    {
-    }
 
     @Override
-    public boolean run(final CommandSender sender, Player player, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
+    public boolean run(CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
-        if(!(sender instanceof Player))
+        FPlayer pl = plugin.pl.getPlayer(playerSender);
+        if(pl.hasBanHammer())
         {
-            sender.sendMessage(ChatColor.RED + "Only in-game players can use this command.");
-            return false;
-        }
-            if (args.length > 0 && "false".equals(args[0]))
-            {
-            FUtil.bcastMsg(ChatColor.AQUA + player.getName() + " has placed the BanHammer back into its sheath");
+            playerSender.getInventory().remove(FUtil.getBanHammer());
+            FUtil.bcastMsg(ChatColor.AQUA + playerSender.getName() + " has placed the BanHammer back into its sheath");
+            pl.setBanHammer(false);
             return true;
         }
-        else
-        {
-            final ItemStack Item = new ItemStack(Material.DIAMOND_AXE, 1);
-            final ItemMeta heldItemMeta = Item.getItemMeta();
-            heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.RED).append("Ban").append(ChatColor.DARK_RED).append("Hammer").toString());
-            heldItemMeta.setLore(Arrays.asList(ChatColor.BLUE + "Unleash the power of...", ChatColor.YELLOW + "The BanHammer!"));
-            Item.setItemMeta(heldItemMeta);
-            final int firstEmpty = player.getInventory().firstEmpty();
-                if (firstEmpty != 0)
-                {
-                    player.getInventory().setItem(firstEmpty, Item);
-                }
-        }
-            player.getWorld().strikeLightning(player.getLocation());
-            FUtil.bcastMsg(ChatColor.RED + player.getName() + " has unleashed the BanHammer!");
-            return true;
-        }
+        
+        pl.setBanHammer(true); //Mmmm BanHammer boi!
+         
+        playerSender.getInventory().addItem(FUtil.getBanHammer());
+        playerSender.getWorld().strikeLightning(playerSender.getLocation());
+        FUtil.bcastMsg(ChatColor.RED + sender.getName() + " has unleashed the BanHammer!");
+        return true;
     }
+}
