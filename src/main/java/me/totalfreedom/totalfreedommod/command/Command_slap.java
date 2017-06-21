@@ -41,7 +41,7 @@ public class Command_slap extends FreedomCommand
         final Player player = getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + "Player " + player + " not found!");
+            sender.sendMessage(ChatColor.RED + "Player \"" + args + "\" not found!");
             return true;
         }
         
