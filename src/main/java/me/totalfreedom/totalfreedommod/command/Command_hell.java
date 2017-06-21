@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+
+// Good job Mnpn, you borked it. Attempting to run this only affects yourself. You can literally only ban yourself with this command. *facepalm*
+
 @CommandPermissions(level = Rank.SUPER_ADMIN, source = SourceType.BOTH, blockHostConsole = false) //Supers can *attempt* to run it, but to no avail.
 @CommandParameters(description = "Send someone to hell.", usage = "/<command> <playername> <reason>")
  public class Command_hell extends FreedomCommand
