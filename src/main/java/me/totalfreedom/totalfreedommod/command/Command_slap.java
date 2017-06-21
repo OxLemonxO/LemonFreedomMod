@@ -35,13 +35,15 @@ public class Command_slap extends FreedomCommand
     {
         if (args.length < 1)
         {
-            return false; 
+            return false;
         }
+        
+        String theplayeritselfifnotactuallyfoundkek = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " "); // Can I learn how to code one day?
         
         final Player player = getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + "Player \"" + args + "\" not found!");
+            sender.sendMessage(ChatColor.RED + "Player \"" + theplayeritselfifnotactuallyfoundkek + "\" not found!");
             return true;
         }
         
