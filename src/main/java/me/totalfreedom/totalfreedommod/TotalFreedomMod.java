@@ -271,10 +271,10 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
                 }
 
                 author = props.getProperty("program.build.author", "Mnpn");
-                codename = props.getProperty("program.build.codename", "Swift");
+                codename = props.getProperty("program.build.codename", "Lemon"); // *lenny*
                 version = props.getProperty("program.build.version", "5");
                 number = props.getProperty("program.build.number", "1.2");
-                date = props.getProperty("program.build.date", "21/06/2017");
+                date = props.getProperty("program.build.date", "22/06/2017");
                 head = props.getProperty("program.build.head", "Dev");
             }
             catch (Exception ex)

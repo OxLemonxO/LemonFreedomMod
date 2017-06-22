@@ -1,5 +1,5 @@
 /*
-Oh looka  license header.
+Oh look a license header.
  */
 package me.totalfreedom.totalfreedommod.command;
 
