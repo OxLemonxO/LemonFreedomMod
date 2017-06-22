@@ -31,7 +31,7 @@ public class Command_say extends FreedomCommand
 
                 for (Player player : server.getOnlinePlayers())
                 {
-                    player.kickPlayer("Server is going restarting.");
+                    player.kickPlayer("Server is restarting.");
                 }
 
                 server.shutdown();
