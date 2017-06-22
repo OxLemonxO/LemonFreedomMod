@@ -33,7 +33,8 @@ public class Command_slap extends FreedomCommand
     {
         if (args.length < 1)
         {
-            return false;
+            FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " slaps themselves..?");
+            return true;
         }
 
         String theplayeritselfifnotactuallyfoundkek = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " "); // Can I learn how to code one day?
