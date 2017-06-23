@@ -1,6 +1,3 @@
-/*
-Oh look a license header.
- */
 package me.totalfreedom.totalfreedommod.command;
 
 import me.totalfreedom.totalfreedommod.rank.Rank;
@@ -12,25 +9,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- *
- * @author mnpn0 Thanks NetBeans I appreciate it.
- */
 @CommandPermissions(level = Rank.OP, source = SourceType.BOTH, blockHostConsole = false)
-@CommandParameters(description = "Slap someone.", usage = "/<command> <playername>")
+@CommandParameters(description = "Be salty.", usage = "/<command> <playername>")
 
-public class Command_slap extends FreedomCommand
+public class Command_salty extends FreedomCommand
 {
+
     @Override
     public boolean run(final CommandSender sender, Player playerSender, Command cmd, String commandLabel, String[] args, boolean senderIsConsole)
     {
         if (args.length < 1)
         {
-            FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " slaps themselves..?");
+            FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " is utterly salty!");
             return true;
         }
 
-        String theplayeritselfifnotactuallyfoundkek = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " "); // Can I learn how to code one day?
+        String theplayeritselfifnotactuallyfoundkek = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
 
         final Player player = getPlayer(args[0]);
         if (player == null)
@@ -39,7 +33,7 @@ public class Command_slap extends FreedomCommand
             return true;
         }
 
-        FUtil.bcastMsg(ChatColor.RED + sender.getName() + ChatColor.YELLOW + " gave " + ChatColor.RED + player.getName() + ChatColor.YELLOW + " a nice slap in the face!");
+        FUtil.bcastMsg(ChatColor.RED + player.getName() + ChatColor.YELLOW + " is salty!" + ChatColor.RED + " (states " + sender.getName() + ").");
         return true;
     }
 }
